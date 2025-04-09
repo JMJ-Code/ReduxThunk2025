@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { changeSearchTerm } from "../store";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 function SearchMovie() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const searchTerm = useSelector((state) => {
+  const searchTerm = useSelector((state: any) => {
     return state.searchMovie.searchTerm;
   });
 

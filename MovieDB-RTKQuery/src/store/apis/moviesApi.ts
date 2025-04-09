@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
 const moviesApi = createApi({
   reducerPath: 'movies',
   baseQuery: fetchBaseQuery({
@@ -11,10 +10,8 @@ const moviesApi = createApi({
       fetchPopularMovies: builder.query({
         query: () => {
           return {
-          //url: 'discover/movie',
             url: 'movie/popular',
             params: {
-            //sort_by: 'popularity.desc',
               api_key: '81c50c197b83129dd4fc387ca6c8c323'
             },
             method: 'GET',
@@ -33,7 +30,8 @@ const moviesApi = createApi({
             method: 'GET',
           };
         },
-      }),    
+      }),
+
       fetchSearchMovie: builder.query({
         query: (searchTerm) => {
           return {
@@ -45,10 +43,32 @@ const moviesApi = createApi({
             method: 'GET',
           };
         },
-      }),    
+      }),
+
+      fetchGenres: builder.query({
+        query: () => {
+          return {
+            url: 'genre/movie/list',
+            params: {
+              api_key: '81c50c197b83129dd4fc387ca6c8c323',
+              language: 'da-DK'
+            },
+            method: 'GET',
+          };
+        },
+      }),
     };
   },
 });
 
-export const {useFetchPopularMoviesQuery, useFetchHighestRatedMoviesQuery, useFetchSearchMovieQuery} = moviesApi;
+// Tilføj nu også den nye hook her:
+export const {
+  useFetchPopularMoviesQuery,
+  useFetchHighestRatedMoviesQuery,
+  useFetchSearchMovieQuery,
+  useFetchGenresQuery, // <-- denne linje er ny
+} = moviesApi;
+
 export { moviesApi };
+
+

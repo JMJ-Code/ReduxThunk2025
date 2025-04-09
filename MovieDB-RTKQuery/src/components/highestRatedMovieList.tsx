@@ -1,9 +1,10 @@
 import { useFetchHighestRatedMoviesQuery } from "../store";
 import MovieCard from "./movieCard"
+import React from 'react';
 
 
 function HighestRatedMovieList() {                                    
-  const {data, error, isFetching } = useFetchHighestRatedMoviesQuery();    
+  const {data, error, isFetching } = useFetchHighestRatedMoviesQuery({});
                                         
 let content;
   if (isFetching) {
