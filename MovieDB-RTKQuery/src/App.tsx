@@ -6,7 +6,9 @@ import MovieImg from './assets/Image/movie_black2.jpg';
 import SearchMovie from './components/searchMovie';
 import SearchedMovieList from './components/searchedMovieList';
 import Home from './components/home';
-import MyList from './components/myList'; // Importer "Min Liste"-komponenten
+import MyList from './components/myList'; 
+import MovieDetails from './components/MovieDetails'; // Importer "Min Liste"-komponenten
+import UpcomingMovies from './components/UpcomingMovies';
 
 function App() { 
   return (
@@ -17,7 +19,8 @@ function App() {
             <Link to='/' className="nav-item nav-link">Home</Link>
             <Link to='/popular' className="nav-item nav-link">Popular</Link>
             <Link to='/highest-rated' className="nav-item nav-link">Highest Rated</Link>
-            <Link to='/my-list' className="nav-item nav-link">My List</Link> {/* Tilføjet her */}
+            <Link to='/my-list' className="nav-item nav-link">My List</Link> 
+            <Link to="/upcoming" className="nav-item nav-link">Kommende Film</Link> 
           </nav>
         </div> 
           <span className='h1'>React Moviefinder <img className="rounded movie_img m-3" src={MovieImg} width="75" height="75" alt="Movie Finder Logo" /></span>
@@ -28,7 +31,9 @@ function App() {
             <Route path='/popular' element={<PopularMoviesList/>} />     
             <Route path='/highest-rated' element={<HighestRatedMovieList/>} />
             <Route path='/searchedMovie' element={<SearchedMovieList/>} /> 
-            <Route path='/my-list' element={<MyList />} /> {/* Tilføjet her */}
+            <Route path='/my-list' element={<MyList />} /> 
+            <Route path="/movie/:movieId" element={<MovieDetails />} />
+            <Route path="/upcoming" element={<UpcomingMovies />} /> 
         </Routes>
     </div>
   );

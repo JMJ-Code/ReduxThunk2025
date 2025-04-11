@@ -1,10 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addMovieToList } from '../store/myListSlice';
 
 function MovieCard({ movie }: { movie: any }) {
   const dispatch = useDispatch();
   const posterBasePath = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
+
+  // Log movie data for debugging
+  console.log(movie);
 
   // Håndter manglende data med fallback-værdier
   const posterPath = movie.poster_path ? posterBasePath + movie.poster_path : 'path/to/default-image.jpg';
@@ -21,10 +25,14 @@ function MovieCard({ movie }: { movie: any }) {
   return (
     <div className="col-lg-2 mb-4">
       <div className="card">
-        <img src={posterPath} className="card-img-top" alt={`Filmplakat for ${title}`} />
+        <Link to={`/movie/${movie.id}`}>
+          <img src={posterPath} className="card-img-top" alt={`Filmplakat for ${title}`} />
+        </Link>
         <div className="card-body">
           <h5 className="card-title">
-            <span>{title.substring(0, 200)}</span>
+            <Link to={`/movie/${movie.id}`} className="text-decoration-none">
+              {title.substring(0, 200)}
+            </Link>
           </h5>
           <span className="far fa-star" aria-hidden="true"></span>
           <span className="ml-1">{voteAverage}</span>
