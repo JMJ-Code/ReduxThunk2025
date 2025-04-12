@@ -3,8 +3,12 @@ import { useFetchUpcomingMoviesQuery } from '../store/apis/moviesApi';
 import { Link } from 'react-router-dom';
 
 function UpcomingMovies() {
-  const { data, error, isLoading } = useFetchUpcomingMoviesQuery();
+  const { data, error, isLoading, isFetching } = useFetchUpcomingMoviesQuery({});
 
+  if(isFetching) {
+    return <div>Loading...</div>
+  }
+  
   if (isLoading) {
     return <div>Indlæser kommende film...</div>;
   }

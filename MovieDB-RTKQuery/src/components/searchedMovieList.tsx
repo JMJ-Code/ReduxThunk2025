@@ -19,6 +19,7 @@ function SearchedMoviesList() {
 
                                                                   
   let content;
+  
   if (isFetching) {
     content = <div>Loading;</div>
   } else if (error) {
