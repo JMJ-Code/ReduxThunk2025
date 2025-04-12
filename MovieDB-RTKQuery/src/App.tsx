@@ -20,7 +20,7 @@ function App() {
             <Link to='/popular' className="nav-item nav-link">Popular</Link>
             <Link to='/highest-rated' className="nav-item nav-link">Highest Rated</Link>
             <Link to='/my-list' className="nav-item nav-link">My List</Link> 
-            <Link to="/upcoming" className="nav-item nav-link">Kommende Film</Link> 
+            <Link to="/upcoming" className="nav-item nav-link">Upcoming Movies</Link> 
           </nav>
         </div> 
           <span className='h1'>React Moviefinder <img className="rounded movie_img m-3" src={MovieImg} width="75" height="75" alt="Movie Finder Logo" /></span>

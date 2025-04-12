@@ -15,7 +15,7 @@ function UpcomingMovies() {
 
   return (
     <div className="container mt-4">
-      <h2>Kommende Film</h2>
+      <h2>Soon realese</h2>
       <div className="row">
         {data.results.map((movie: any) => (
           <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={movie.id}>

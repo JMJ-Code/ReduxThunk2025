@@ -51,7 +51,7 @@ const moviesApi = createApi({
             url: 'genre/movie/list',
             params: {
               api_key: '81c50c197b83129dd4fc387ca6c8c323',
-              language: 'da-DK',
+              language: 'en-US',
             },
             method: 'GET',
           };
@@ -64,6 +64,7 @@ const moviesApi = createApi({
             params: {
               api_key: '81c50c197b83129dd4fc387ca6c8c323',
               language: 'en-US', // Skift til 'en-US', hvis du foretrækker engelske resultater
+              region: 'US', // Begræns resultaterne til Danmark (valgfrit)
             },
             method: 'GET',
           };
