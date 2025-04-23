@@ -1,3 +1,6 @@
+
+// TheMovieDB API-respons for en liste af film
+// Repræsenterer en film, som TheMovieDB returnerer
 // API-respons for en liste af film
 export interface MovieResponse {
     adult: boolean;
@@ -17,6 +20,7 @@ export interface MovieResponse {
 
   }
   
+  // API-respons for en liste af film (med flere detaljer)
   // Repræsenterer en film, som TheMovieDB returnerer
   export interface Movie {
     id: number;
@@ -30,6 +34,8 @@ export interface MovieResponse {
 
   }
   
+  // API-respons for en liste af film (med flere detaljer)
+  // Repræsenterer en film, som TheMovieDB returnerer
   // Vores egen film-model, som vi bruger i applikationen
   export interface MovieResults {
     id: number;

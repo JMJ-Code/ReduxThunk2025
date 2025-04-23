@@ -1,41 +1,33 @@
-import React from "react";
-import { useFetchGenresQuery } from "../store";
+import React from "react"; 
+import { useFetchGenresQuery } from "../store"; // RTK Query hook til at hente genrer
+import { useDispatch } from "react-redux"; // Hook til at sende actions til Redux
+import { changeGenreFilter } from "../store/searchMovieSlice"; // Action til at opdatere genre-filter i Redux
 
-interface Genre {
-  id: number;
-  name: string;
-}
+function GenreFilter() {
+  const dispatch = useDispatch(); // Initialiserer dispatch-funktionen fra Redux
+  const { data, error, isLoading } = useFetchGenresQuery({}); // Henter genrer fra API’et via RTK Query
 
-interface GenreFilterProps {
-  onSelectGenre: (genreId: string) => void;
-}
-
-function GenreFilter({ onSelectGenre }: GenreFilterProps) {
-  const { data, error, isLoading } = useFetchGenresQuery({});
-
-  console.log({ data, error, isLoading }); // Debugging
-
+  // Viser en besked mens data hentes
   if (isLoading) return <div>Indlæser genrer...</div>;
-  if (error) return <div>Fejl ved indlæsning af genrer.</div>;
-  if (!data?.genres || data.genres.length === 0) {
-    return <div>Ingen genrer fundet.</div>;
-  }
 
+  // Viser fejlbesked hvis noget går galt under hentning
+  if (error) return <div>Fejl ved indlæsning af genrer.</div>;
+
+  // Håndterer ændringer i select-dropdown
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const genreId = event.target.value;
-    onSelectGenre(genreId); // sender valgt genre-id tilbage til parent
+    const genreId = event.target.value; // Henter valgt genreId
+    console.log("Selected Genre ID:", genreId); // Debug: viser den valgte genre i konsollen
+    dispatch(changeGenreFilter(genreId)); // Sender action til Redux for at opdatere filteret
   };
 
   return (
-    <div className="m-3">
-      <label htmlFor="genre-select" className="form-label fw-bold">
-        Vælg genre:
-      </label>
-      <select className="form-select" id="genre-select" onChange={handleChange}>
-        <option value="">Alle genrer</option>
-        {data.genres.map((genre: Genre) => (
-          <option key={genre.id} value={genre.id.toString()}>
-            {genre.name}
+    <div>
+      <label htmlFor="genre-select">Vælg genre:</label>
+      <select id="genre-select" onChange={handleChange}>
+        <option value="">Alle genrer</option> {/* Standardvalg */}
+        {data?.genres.map((genre) => (
+          <option key={genre.id} value={genre.id}>
+            {genre.name} {/* Viser genre-navnet i dropdown */}
           </option>
         ))}
       </select>
@@ -43,4 +35,4 @@ function GenreFilter({ onSelectGenre }: GenreFilterProps) {
   );
 }
 
-export default GenreFilter;
+export default GenreFilter; // Eksporterer komponenten så den kan bruges i andre filer

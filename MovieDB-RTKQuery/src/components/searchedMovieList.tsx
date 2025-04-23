@@ -1,43 +1,43 @@
-import { useFetchSearchMovieQuery } from "../store";
-import MovieCard from "./movieCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useFetchSearchMovieQuery } from "../store"; // RTK Query hook til at hente søgeresultater
+import MovieCard from "./movieCard"; // Komponent til at vise enkelt filmkort
+import { useSelector, useDispatch } from "react-redux"; // Redux hooks
 import React from 'react';
-import { RootState } from "../store"; // Import RootState type
-
+import { RootState } from "../store"; // Importering af RootState-typen til Redux
 
 function SearchedMoviesList() {  
-    const searchTerm = useSelector((state: RootState) => {
-        return state.searchMovie.searchTerm;
-    });
-                                  //Bemærk Query-function kaldes automatisk nå komponenten bliver displayed
-  const {data, error, isFetching } = useFetchSearchMovieQuery(searchTerm);    //kaldet vil straks hente data i et result-objekt, som vi "destructure" til data, error og isLoading
-               //Bemærk Mutation-function returnere et array med en function, som kan kaldes når data skal ændres
-  //console.log(data, error, isFetching);                           //samt et objekt results der er meget tilsvarende det der returneres fra et Query-function kald
-  //til start er results objektet "uinitialiseret", efter kald af funktionen vil det indeholde mange flere properties
-                                                                   //med relevante værdier fx data, isSucces/isError mm 
+  // Henter søgetermen fra Redux state
+  const searchTerm = useSelector((state: RootState) => {
+    return state.searchMovie.searchTerm;
+  });
 
+  // Kalder RTK Query funktionen til at hente søgeresultater for den aktuelle søgeterm
+  const { data, error, isFetching } = useFetchSearchMovieQuery(searchTerm); 
 
-                                                                  
   let content;
-  
+
+  // Viser loading-tekst mens data hentes
   if (isFetching) {
-    content = <div>Loading;</div>
-  } else if (error) {
+    content = <div>Loading;</div>;
+  } 
+  // Viser fejlbesked hvis der opstår en fejl under hentning af data
+  else if (error) {
     content = <div>Error loading movies.</div>;
-  } else {
+  } 
+  // Hvis data er hentet korrekt
+  else {
     content = data.results
-        .filter(movie => movie.poster_path !== null)
-        .map((movie) => {
-      return <MovieCard key={movie.id} movie={movie}></MovieCard>
-    });
+      .filter(movie => movie.poster_path !== null) // Filtrerer film uden plakatbillede
+      .map((movie) => {
+        return <MovieCard key={movie.id} movie={movie}></MovieCard>;
+      });
   }
 
-
-    return (
+  return (
     <div className="row row-cols-3 row-cols-md-2 m-4">
-      {content}
+      {content} {/* Viser de filtrerede filmkort */}
     </div>
   );
 }
 
 export default SearchedMoviesList;
+

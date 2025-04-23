@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Importer createSlice fra Redux Toolkit
 const searchMovieSlice = createSlice({
     name: 'searchMovie',
     initialState: {
         searchTerm: '',
         genreFilter: '' // Added genreFilter to the initial state
     },
+    // Define the reducers
     reducers: {
         changeSearchTerm(state, action) {
             state.searchTerm = action.payload;

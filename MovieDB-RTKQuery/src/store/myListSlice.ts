@@ -19,11 +19,12 @@ const loadFromLocalStorage = (): Movie[] => {
   return data ? JSON.parse(data) : [];
 };
 
-// Initial state
+// Initialiserer state med data fra Local Storage
 const initialState: MyListState = {
   movies: loadFromLocalStorage(),
 };
 
+// Opretter en slice til håndtering af "myList" state
 const myListSlice = createSlice({
   name: "myList",
   initialState,
@@ -44,5 +45,6 @@ const myListSlice = createSlice({
   },
 });
 
+// Eksporter reducerne og actions
 export const { addMovieToList, removeMovieFromList } = myListSlice.actions;
 export const myListReducer = myListSlice.reducer;
